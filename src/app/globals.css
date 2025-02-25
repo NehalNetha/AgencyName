@@ -2,20 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (min-width: 768px) {
+  .body {
+    margin-left: 30px;
+    margin-right: 30px;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
+@keyframes gradient-pulse {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .particle-interaction {
+    transition: all 0.3s ease-out;
+  }
+  
+  .particle-interaction:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  
+  .gradient-mask {
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+  }
+
+  .glass-layer {
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+  }
+  
+  .quantum-gradient {
+    background: linear-gradient(
+      45deg,
+      hsl(210deg 100% 60% / 0.15),
+      hsl(330deg 100% 60% / 0.15),
+      hsl(160deg 100% 60% / 0.15)
+    );
+    filter: blur(60px);
+  }
