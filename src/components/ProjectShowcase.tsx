@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 type Project = {
@@ -10,75 +10,147 @@ type Project = {
   image: string
   category: string
   technologies: string[]
+  client?: string
+  completionDate?: string
 }
 
 const projects: Project[] = [
   {
     id: 1,
     title: "AI-Powered Analytics Dashboard",
-    description: "A comprehensive analytics platform that leverages artificial intelligence to provide real-time insights and predictive analysis.",
+    description: "A comprehensive analytics platform that leverages artificial intelligence to provide real-time insights and predictive analysis for enterprise clients.",
     image: "/projects/project1.jpg",
     category: "Web Application",
-    technologies: ["React", "Node.js", "TensorFlow"]
+    technologies: ["React", "Node.js", "TensorFlow"],
+    client: "TechCorp Inc.",
+    completionDate: "March 2024"
   },
-  // Add more projects as needed
+  {
+    id: 2,
+    title: "E-commerce Conversion Optimizer",
+    description: "Data-driven solution that analyzes customer behavior patterns to optimize conversion rates and enhance the shopping experience.",
+    image: "/projects/project2.jpg",
+    category: "Data Science",
+    technologies: ["Python", "AWS", "BigQuery"],
+    client: "RetailGiant",
+    completionDate: "January 2024"
+  },
+  {
+    id: 3,
+    title: "Financial Market Prediction System",
+    description: "Advanced analytical tool that processes market data to identify trends and generate trading insights with high accuracy.",
+    image: "/projects/project3.jpg",
+    category: "Machine Learning",
+    technologies: ["Python", "PyTorch", "MongoDB"],
+    client: "InvestGroup",
+    completionDate: "November 2023"
+  },
+  {
+    id: 4,
+    title: "Healthcare Patient Outcome Analyzer",
+    description: "Platform that processes medical data to predict patient outcomes and suggest optimized treatment plans for healthcare providers.",
+    image: "/projects/project4.jpg",
+    category: "Healthcare",
+    technologies: ["React", "Python", "Azure"],
+    client: "MedTech Solutions",
+    completionDate: "February 2024"
+  }
 ]
 
 const ProjectShowcase = () => {
   const [currentProject, setCurrentProject] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return
+      
+      const rect = containerRef.current.getBoundingClientRect()
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      })
+    }
+
+    const element = containerRef.current
+    element?.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      element?.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
+  const changeProject = (index: number) => {
+    if (isAnimating || index === currentProject) return
+    setIsAnimating(true)
+    setCurrentProject(index)
+    setTimeout(() => setIsAnimating(false), 500)
+  }
 
   const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length)
+    if (isAnimating) return
+    changeProject((currentProject + 1) % projects.length)
   }
 
   const previousProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length)
+    if (isAnimating) return
+    changeProject((currentProject - 1 + projects.length) % projects.length)
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 py-20">
-      {/* Navigation Buttons */}
-      <button 
-        onClick={previousProject}
-        className="absolute left-4 md:left-8 z-20 p-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 text-white hover:bg-white/20 transition-all"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+    <div className="relative py-20 md:py-32" ref={containerRef}>
+      {/* Section Title */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-16">
+        <h2 className="text-3xl md:text-5xl font-medium text-white mb-4">Our Projects</h2>
+        <p className="text-lg text-white/70 max-w-2xl">
+          Explore our portfolio of data-driven solutions that have helped businesses transform raw information into actionable insights.
+        </p>
+      </div>
 
-      <button 
-        onClick={nextProject}
-        className="absolute right-4 md:right-8 z-20 p-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 text-white hover:bg-white/20 transition-all"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Project Display */}
-      <div className="relative w-full max-w-7xl aspect-[16/9] rounded-3xl overflow-hidden">
-        {/* Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={projects[currentProject].image}
-            alt={projects[currentProject].title}
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-        {/* Project Details - Glass morphism overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 bg-white/10 backdrop-blur-xl border-t border-white/20">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="px-3 py-1 rounded-full bg-purple-500/20 backdrop-blur-xl text-purple-300 text-sm">
-                {projects[currentProject].category}
-              </span>
-              <div className="flex gap-2">
+      {/* Cursor gradient light effect */}
+      <div 
+        className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(168, 85, 247, 0.15), transparent 40%)`,
+        }}
+      />
+      
+      {/* Project Showcase Grid */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Featured Project Display */}
+          <div className="relative rounded-3xl overflow-hidden aspect-square md:aspect-auto md:row-span-1 particle-interaction">
+            <div className="absolute inset-0 bg-purple-500/10 mix-blend-overlay z-10"></div>
+            <Image
+              src={projects[currentProject].image}
+              alt={projects[currentProject].title}
+              fill
+              className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-20"></div>
+            
+            {/* Project Details */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-30">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 rounded-full bg-purple-500/30 backdrop-blur-xl text-purple-300 text-sm">
+                  {projects[currentProject].category}
+                </span>
+                <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-xl text-white/80 text-sm">
+                  {projects[currentProject].client}
+                </span>
+              </div>
+              
+              <h3 className="text-2xl md:text-3xl font-medium text-white mb-3">
+                {projects[currentProject].title}
+              </h3>
+              
+              <p className="text-white/70 mb-6 line-clamp-3">
+                {projects[currentProject].description}
+              </p>
+              
+              <div className="flex flex-wrap gap-2 mb-6">
                 {projects[currentProject].technologies.map((tech, index) => (
                   <span 
                     key={index}
@@ -88,32 +160,98 @@ const ProjectShowcase = () => {
                   </span>
                 ))}
               </div>
+              
+              <a href="#" className="inline-flex items-center gap-2 text-white hover:text-purple-300 transition-colors">
+                View Case Study
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
             </div>
-
-            <h2 className="text-3xl md:text-4xl font-medium text-white mb-4">
-              {projects[currentProject].title}
-            </h2>
+          </div>
+          
+          {/* Project Thumbnails / Navigation */}
+          <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/10 particle-interaction">
+            <div className="flex items-center justify-between mb-6">
+              <h4 className="text-xl text-white">Project Gallery</h4>
+              <div className="flex gap-2">
+                <button 
+                  onClick={previousProject}
+                  className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors disabled:opacity-50"
+                  disabled={isAnimating}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button 
+                  onClick={nextProject}
+                  className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors disabled:opacity-50"
+                  disabled={isAnimating}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
             
-            <p className="text-white/70 text-lg">
-              {projects[currentProject].description}
-            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {projects.map((project, index) => (
+                <div 
+                  key={project.id}
+                  onClick={() => changeProject(index)}
+                  className={`relative rounded-xl overflow-hidden cursor-pointer aspect-[4/3] transition-all duration-300 ${
+                    currentProject === index ? 'ring-2 ring-purple-500 scale-95' : 'opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  <div className="absolute bottom-2 left-3 right-3">
+                    <p className="text-white text-sm font-medium truncate">{project.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Project Navigation Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => changeProject(index)}
+                  className={`transition-all duration-300 ${
+                    currentProject === index 
+                      ? "bg-purple-500 w-6 h-2 rounded-full" 
+                      : "bg-white/30 hover:bg-white/50 w-2 h-2 rounded-full"
+                  }`}
+                  aria-label={`View project ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Project Navigation Dots */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {projects.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentProject(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              currentProject === index 
-                ? "bg-white w-6" 
-                : "bg-white/30 hover:bg-white/50"
-            }`}
-          />
-        ))}
+      
+      {/* Call to Action */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
+        <div className="bg-gradient-to-r from-purple-500/20 to-purple-800/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-purple-500/30">
+          <h3 className="text-2xl md:text-3xl font-medium text-white mb-4">
+            Ready to transform your data into insights?
+          </h3>
+          <p className="text-white/70 max-w-2xl mx-auto mb-8">
+            Let's collaborate on your next data project and unlock the hidden potential in your information.
+          </p>
+          <button className="px-8 py-3 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-colors">
+            Start Your Project
+          </button>
+        </div>
       </div>
     </div>
   )

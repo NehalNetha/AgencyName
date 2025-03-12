@@ -1,9 +1,60 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const Process = () => {
   const [activeStep, setActiveStep] = useState<number | null>(2);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // Add particle state and ref
+  const [particles, setParticles] = useState<Array<{x: number, y: number, size: number, speed: number, opacity: number}>>([]);
+  const animationRef = useRef<number | null>(null);
+
+  // Initialize particles
+  useEffect(() => {
+    const createParticles = () => {
+      const newParticles = [];
+      for (let i = 0; i < 50; i++) {
+        newParticles.push({
+          x: Math.random() * 100,
+          y: Math.random() * 100,
+          size: Math.random() * 3 + 1,
+          speed: Math.random() * 0.3 + 0.1,
+          opacity: Math.random() * 0.5 + 0.1
+        });
+      }
+      setParticles(newParticles);
+    };
+    
+    createParticles();
+  }, []);
+
+  // Animate particles
+  useEffect(() => {
+    const animateParticles = () => {
+      setParticles(prevParticles => 
+        prevParticles.map(particle => ({
+          ...particle,
+          y: particle.y - particle.speed,
+          x: particle.x + Math.sin(particle.y / 20) * 0.2,
+          ...(particle.y < -5 ? {
+            y: 105,
+            x: Math.random() * 100,
+            size: Math.random() * 3 + 1,
+            opacity: Math.random() * 0.5 + 0.1
+          } : {})
+        }))
+      );
+      
+      animationRef.current = requestAnimationFrame(animateParticles);
+    };
+    
+    animationRef.current = requestAnimationFrame(animateParticles);
+    
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -35,7 +86,26 @@ const Process = () => {
 
   return (
     <div id="process-section" className="relative overflow-hidden">
-      {/* Cursor gradient light effect */}
+      {/* Add particles container */}
+      <div className="absolute inset-0 overflow-hidden">
+        {particles.map((particle, index) => (
+          <div
+            key={index}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              opacity: particle.opacity,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.size}px rgba(255, 255, 255, ${particle.opacity})`,
+              transform: `translateZ(0)`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Existing cursor gradient light effect */}
       <div 
         className="pointer-events-none absolute -inset-px transition-opacity duration-300"
         style={{
@@ -49,7 +119,7 @@ const Process = () => {
           <div className="flex-1">
             <h2 className="text-5xl font-medium text-white mb-8">Process</h2>
             <div className="relative">
-              <img src="/process-diagram.svg" alt="Process Diagram" className="w-full max-w-lg" />
+              <img src="/process.png" alt="Process Diagram" className="w-full max-w-lg" />
             </div>
           </div>
 
