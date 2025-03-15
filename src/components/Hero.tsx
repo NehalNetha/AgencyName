@@ -2,13 +2,12 @@ const Hero = () => {
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-5xl mx-auto -mt-20 px-4">
       <h1 className="text-4xl md:text-7xl font-medium text-white leading-tight tracking-wide">
-        Data Refined, Deeper<br />
-        Insights Defined
+      Turn your ideas into reality <br />
+      We ship fast
       </h1>
       
       <p className="text-lg text-white/80 mt-6 max-w-2xl">
-        Transforming raw data into meaningful insights
-        to drive smarter decisions.
+        From concept to development, we develop MVP's to full scale applications.
       </p>
 
       {/* Call to Action Buttons */}

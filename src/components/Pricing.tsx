@@ -30,16 +30,28 @@ const Pricing = () => {
               </div>
               <div className="mb-6">
                 <div className="flex items-baseline">
-                  <span className="text-5xl font-bold text-white">Free</span>
+                  <span className="text-5xl font-bold text-white">$500</span>
                 </div>
-                <p className="text-white/70 mt-2">For individuals who want to securely connect personal devices.</p>
+                <p className="text-white/70 mt-2">Turn your ideas into MVP's fast.</p>
               </div>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center text-white/70">
                   <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  1 device
+                  Full Stack Application
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Get it ready by 2 Weeks
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Maintance Support for one more week.
                 </li>
               </ul>
               <button className="w-full py-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">
@@ -56,7 +68,7 @@ const Pricing = () => {
               opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-purple-500 text-white px-4 py-1 rounded-full text-sm">Best Deal</span>
+                <span className="bg-purple-500 text-white px-4 py-1 rounded-full text-sm mb-5">Best Deal</span>
               </div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
@@ -64,31 +76,47 @@ const Pricing = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <div>
+                <div className="mt-3">
                   <h3 className="text-xl font-medium text-white">Starter</h3>
-                  <p className="text-white/70">For small teams</p>
                 </div>
               </div>
               <div className="mb-6">
                 <div className="flex items-baseline">
-                  <span className="text-5xl font-bold text-white">$2.99</span>
-                  <span className="text-white/70 ml-2">/month</span>
+                  <span className="text-5xl font-bold text-white">$1000</span>
+                  <span className="text-white/70 ml-2"></span>
                 </div>
-                <div className="text-purple-400 mt-2">Save 65%</div>
-                <p className="text-white/70 mt-2">For teams looking for an easy-to-use, secure solution.</p>
+                <p className="text-white/70 mt-2">For anyone looking to integrate anything into their business, or want to invest in their idea</p>
               </div>
               <ul className="space-y-4 mb-8">
-                <li className="flex items-center text-white/70">
+              <li className="flex items-center text-white/70">
                   <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Covers 5 devices
+                  Full Stack Application / mobile app
                 </li>
                 <li className="flex items-center text-white/70">
                   <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  30-day money-back guarantee
+                  Get it ready by 2 - 4 Weeks
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Maintance support for one month
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Request for more features
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Marketing Suggestions
                 </li>
               </ul>
               <button className="w-full py-3 rounded-full bg-purple-500 text-white hover:bg-purple-600 transition-colors">
@@ -112,29 +140,56 @@ const Pricing = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-medium text-white">Premium</h3>
-                  <p className="text-white/70">For enterprises</p>
                 </div>
               </div>
               <div className="mb-6">
                 <div className="flex items-baseline">
-                  <span className="text-5xl font-bold text-white">$6.99</span>
-                  <span className="text-white/70 ml-2">/month</span>
+                  <span className="text-5xl font-bold text-white">$3000</span>
                 </div>
-                <div className="text-purple-400 mt-2">Save 75%</div>
-                <p className="text-white/70 mt-2">For companies who need service and resource level control.</p>
+                <p className="text-white/70 mt-2">To fully develop your idea into a business</p>
               </div>
               <ul className="space-y-4 mb-8">
-                <li className="flex items-center text-white/70">
+              <li className="flex items-center text-white/70">
                   <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  Covers 10 devices
+                  Full Stack Application / mobile app
                 </li>
                 <li className="flex items-center text-white/70">
                   <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  30-day money-back guarantee
+                  Get it ready by 2 - 4 Weeks
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Maintance support for two/three month
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Request for more features
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Marketing Suggestions
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Make your idea monetizable
+                </li>
+                <li className="flex items-center text-white/70">
+                  <svg className="h-5 w-5 text-purple-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Fully Scalable/ Custom Deployments
                 </li>
               </ul>
               <button className="w-full py-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">

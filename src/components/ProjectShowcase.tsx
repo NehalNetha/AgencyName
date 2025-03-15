@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Project = {
   id: number
@@ -12,48 +13,46 @@ type Project = {
   technologies: string[]
   client?: string
   completionDate?: string
+  url?: string
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "AI-Powered Analytics Dashboard",
-    description: "A comprehensive analytics platform that leverages artificial intelligence to provide real-time insights and predictive analysis for enterprise clients.",
-    image: "/projects/project1.jpg",
+    title: "Quiz App",
+    description: "A Fully development game, where users can create quizzes with the help of LLM's and play them on the platform with their friends",
+    image: "/projects/quiz.png",
     category: "Web Application",
-    technologies: ["React", "Node.js", "TensorFlow"],
-    client: "TechCorp Inc.",
-    completionDate: "March 2024"
+    technologies: ["NextJS", "NodeJS", "GEMINI"],
+    url: "https://quizlightyear.vercel.app/" 
+
   },
   {
     id: 2,
-    title: "E-commerce Conversion Optimizer",
-    description: "Data-driven solution that analyzes customer behavior patterns to optimize conversion rates and enhance the shopping experience.",
-    image: "/projects/project2.jpg",
-    category: "Data Science",
-    technologies: ["Python", "AWS", "BigQuery"],
-    client: "RetailGiant",
-    completionDate: "January 2024"
+    title: "Adcance AI powered Jewellery Detection",
+    description: "Advanced AI-powered system that detects and classifies jewellery items based on their visual characteristics.",
+    image: "/projects/karishma.png",
+    category: "AI",
+    technologies: ["Python", "NextJS", "Pytorch"],
+    client: "Jewellary Company",
+    completionDate: "Feb 2025"
   },
   {
     id: 3,
-    title: "Financial Market Prediction System",
-    description: "Advanced analytical tool that processes market data to identify trends and generate trading insights with high accuracy.",
-    image: "/projects/project3.jpg",
+    title: "Budget Buddy",
+    description: "A tool that lets u track and manage expenses, helping users stay on top of their budgets and make informed financial decisions.",
+    image: "/projects/budgetBuddy.png",
     category: "Machine Learning",
-    technologies: ["Python", "PyTorch", "MongoDB"],
-    client: "InvestGroup",
-    completionDate: "November 2023"
+    technologies: ["SwiftUI", "Figma"]
   },
   {
     id: 4,
-    title: "Healthcare Patient Outcome Analyzer",
-    description: "Platform that processes medical data to predict patient outcomes and suggest optimized treatment plans for healthcare providers.",
-    image: "/projects/project4.jpg",
-    category: "Healthcare",
-    technologies: ["React", "Python", "Azure"],
-    client: "MedTech Solutions",
-    completionDate: "February 2024"
+    title: "Course Mate",
+    description: "Instantly generate a course outline based on the user's input, providing them with a structured videos to complete their course.",
+    image: "/projects/courseMate.png",
+    category: "Education",
+    technologies: ["NextJS", "Gemini"],
+    url: "https://course-mate-mate.vercel.app/"
   }
 ]
 
@@ -161,8 +160,13 @@ const ProjectShowcase = () => {
                 ))}
               </div>
               
-              <a href="#" className="inline-flex items-center gap-2 text-white hover:text-purple-300 transition-colors">
-                View Case Study
+              <a 
+                href={projects[currentProject].url || "#"} 
+                className="inline-flex items-center gap-2 text-white hover:text-purple-300 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit Project
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -196,9 +200,22 @@ const ProjectShowcase = () => {
                 </button>
               </div>
             </div>
-            
             <div className="grid grid-cols-2 gap-3">
               {projects.map((project, index) => (
+                  <a 
+                  href={project.url} 
+                  key={project.id}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    changeProject(index);
+                    if (project.url) {
+                      window.open(project.url, '_blank');
+                    }
+                  }}
+                >
+
                 <div 
                   key={project.id}
                   onClick={() => changeProject(index)}
@@ -217,6 +234,7 @@ const ProjectShowcase = () => {
                     <p className="text-white text-sm font-medium truncate">{project.title}</p>
                   </div>
                 </div>
+                </a>
               ))}
             </div>
             

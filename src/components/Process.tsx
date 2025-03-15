@@ -78,10 +78,10 @@ const Process = () => {
   };
 
   const steps = [
-    { number: 1, title: 'Research', content: 'Understanding your business needs and market requirements.' },
-    { number: 2, title: 'Concept Design', content: `Once the wireframe get approved at step 1, we'll build prototype design to visually the idea` },
-    { number: 3, title: 'Implementation', content: 'Bringing the approved design to life with clean, efficient code.' },
-    { number: 4, title: 'Testing', content: 'Rigorous testing to ensure quality and performance.' }
+    { number: 1, title: 'Discovery & Planning', content: 'We start by understanding your business goals, target audience, and technical requirements to create a comprehensive project roadmap.' },
+    { number: 2, title: 'Design & Prototyping', content: `Our designers create intuitive user interfaces and interactive prototypes that align with your brand and provide optimal user experience.` },
+    { number: 3, title: 'Development', content: 'Our developers build your solution using modern technologies and best practices, ensuring scalable, maintainable, and secure code.' },
+    { number: 4, title: 'Deployment', content: 'Getting the product to the market is thes single most important thing, so, we ship it fast' }
   ];
 
   return (
