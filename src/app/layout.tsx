@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agency Serious - Data-Driven Solutions",
+  title: "Continue",
   description: "We create innovative data-driven solutions that transform businesses and drive growth.",
   icons: {
     icon: '/logoAnimations/one.svg',
